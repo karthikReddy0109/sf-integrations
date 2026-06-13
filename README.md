@@ -1,18 +1,11 @@
-# Salesforce DX Project: Next Steps
+## Scenario — 1 
+### Weather-Based Lead Follow-Up System
+Your client is a real estate company. When a Lead is created with a City__c field filled in, they want to automatically fetch the current weather of that city from an external weather API and stamp it on a custom field Weather_Condition__c on the Lead.
+The business logic is: if the weather condition is Rain or Storm, automatically set the Lead's Follow_Up_Priority__c to High — because people are more likely to be indoors and responsive to calls during bad weather.
+    * Created a External Credential to define authentication
+    * Created a Named Credential to define base URL
+    * Salesforce will not allow you to make a synchronous callout. So always make  callouts in asynchronous ex: Queueable
+    * create a trigger on lead 
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+    
 
-## How Do You Plan to Deploy Your Changes?
-
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
