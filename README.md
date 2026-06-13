@@ -8,5 +8,21 @@ The business logic is: if the weather condition is Rain or Storm, automatically 
 * Salesforce will not allow you to make a synchronous callout. So always make  callouts in asynchronous ex: Queueable
 * create a trigger on lead 
 
+## Scenario - 2
+### Expose Salesforce Data to an External Portal
+Your client has an external customer portal built in React. The portal needs to fetch a list of open Cases for a given Account directly from Salesforce via a REST API — without logging into Salesforce.
+Build a custom inbound REST API using @RestResource that:
+
+Accepts an Account Id as a URL parameter
+Returns all open Cases under that Account with fields: Id, Subject, Status, Priority, CreatedDate
+Returns proper HTTP status codes — 200 for success, 404 if Account not found, 500 for unexpected errors
+Handles the response in JSON format
+
+Extend it: The external portal sends a custom header X-Portal-Token with every request. Your Apex should validate this token against a value stored in a Custom Setting — if it does not match, return a 401 Unauthorized response.
     
+* Built a global class CaseRestService
+* Written a method getOpenCases annotated with **@HttpGet**
+* When an external system calls your endpoint, salesforce gives you 2 objects via RestContext
+* RestRequest contains all headers
+* RestResponse - used to send response
 
