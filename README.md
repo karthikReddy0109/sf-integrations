@@ -26,3 +26,17 @@ Extend it: The external portal sends a custom header X-Portal-Token with every r
 * RestRequest contains all headers
 * RestResponse - used to send response
 
+## Scenario - 3
+### Bidirectional Sync with an External Inventory System
+
+Your client sells products and manages inventory in an external system. Whenever a product's Stock_Quantity__c falls below a threshold in Salesforce, it should automatically trigger a restock request to the external inventory system via a REST callout.
+When the external system processes the restock, it calls back into Salesforce via your inbound REST API to update the Stock_Quantity__c and set Restock_Status__c to Fulfilled.
+Build both sides:
+
+Outbound — Trigger on Product__c detects low stock → Queueable callout → POST to external system
+Inbound — @RestResource endpoint that accepts the callback and updates the Product record
+
+Extend it: If the outbound callout fails, log the failure in a Sync_Error_Log__c object and retry up to 3 times using a Queueable chain. Track the retry count on the log record.
+
+* Created a Trigger on Product object
+* Created a ProductTriggerHandler class. The method **checkIfProductRequireRestock**  calls Queueable class(RestockRequestQueueable) when stock quantity goes below Restock threshold and 
